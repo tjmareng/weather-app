@@ -1,14 +1,29 @@
 const request = require('request');
+const yargs = require('yargs');
 
-var options = {
-    url: 'https://maps.googleapis.com/maps/api/geocode/json?' +
-    'ADDRESS' +
-    '&key=INSERT-KEY',
-    json: true
-  };
+const argv = yargs
+  .options({
+    
+    // ADDRESS
+    a: {
+      demand: true,
+      alias: 'address',
+      describe: 'Address to fetch weather for',
+      string: true
+    }
   
+})
+  .help()
+  .alias('help', 'h')
+  .argv;
+
+console.log(argv);
+
 request({
-    options
+  url: '',
+  json: true
 }, (error, response, body) => {
-    console.log(JSON.stringify(body, undefined, 2));
+    console.log(`Address: ${body.results[0].locations[0].street}`)
+    console.log(`Latitude: ${body.results[0].locations[0].latLng.lat}`)
+    console.log(`Longitude: ${body.results[0].locations[0].latLng.lng}`)
 });
