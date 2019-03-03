@@ -1,5 +1,6 @@
 const request = require('request');
 const yargs = require('yargs');
+const geocode = require('./utils/geocode.js');
 
 // DARKSKY API
 const darkskyURL = 'https://api.darksky.net/forecast/9a06b0fc0575fe9a8a56720eb9d953f6/37.8267,-122.4233';
@@ -69,34 +70,34 @@ const darkskyURL = 'https://api.darksky.net/forecast/9a06b0fc0575fe9a8a56720eb9d
 // FUNCTIONS ----------------------------------------------
 
 // GEOCODING
-const geocode = (address, callback) => {
-  // GEOCODING --- MAPBOX API
-  const geocodeURL = 'https://api.mapbox.com/geocoding/v5/mapbox.places/' + address + '.json?access_token=pk.eyJ1IjoidGptYXJlbmciLCJhIjoiY2pzc2FtdXQ1MDEwMzN5dGxjdWpzem1sdSJ9.snBdNxYv3k0S3gzbvsF8BA';
+// const geocode = (address, callback) => {
+//   // GEOCODING --- MAPBOX API
+//   const geocodeURL = 'https://api.mapbox.com/geocoding/v5/mapbox.places/' + address + '.json?access_token=pk.eyJ1IjoidGptYXJlbmciLCJhIjoiY2pzc2FtdXQ1MDEwMzN5dGxjdWpzem1sdSJ9.snBdNxYv3k0S3gzbvsF8BA';
   
-  request({
-    url: geocodeURL,
-    json: true
+//   request({
+//     url: geocodeURL,
+//     json: true
 
-  }, (error, response) => {
-    if (error) {
-      // Low-level error 
-      callback('Unable to connect to location services. ', undefined);
+//   }, (error, response) => {
+//     if (error) {
+//       // Low-level error 
+//       callback('Unable to connect to location services. ', undefined);
 
-    } else if (response.body.features.length === 0) {
-      // Invalid location -- URL error
-      callback('Unable to find location. Please try again with a valid location. ', undefined);
+//     } else if (response.body.features.length === 0) {
+//       // Invalid location -- URL error
+//       callback('Unable to find location. Please try again with a valid location. ', undefined);
     
-    } else {
-      // Find and print latitude and longitude 
-      callback(undefined, {
-        latitude: response.body.features[0].center[0],
-        longitude: response.body.features[0].center[1],
-        locaiton: response.body.features[0].place_name
-      })
-    }
-  })
+//     } else {
+//       // Find and print latitude and longitude 
+//       callback(undefined, {
+//         latitude: response.body.features[0].center[0],
+//         longitude: response.body.features[0].center[1],
+//         locaiton: response.body.features[0].place_name
+//       })
+//     }
+//   })
 
-}
+// }
 
 geocode('New York', (error, data) => {
     console.log('Error', error)
