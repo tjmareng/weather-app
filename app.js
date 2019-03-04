@@ -1,12 +1,9 @@
 const request = require('request');
 const yargs = require('yargs');
 const geocode = require('./utils/geocode.js');
+const forecast = require('./utils/forecast.js');
 
-// DARKSKY API
-//const darkskyURL = 'https://api.darksky.net/forecast/9a06b0fc0575fe9a8a56720eb9d953f6/37.8267,-122.4233';
-
-// GEOCODING --- MAPBOX API
-//const geocodeURL = 'https://api.mapbox.com/geocoding/v5/mapbox.places/' + address + '.json?access_token=pk.eyJ1IjoidGptYXJlbmciLCJhIjoiY2pzc2FtdXQ1MDEwMzN5dGxjdWpzem1sdSJ9.snBdNxYv3k0S3gzbvsF8BA';
+const address = process.argv[2]
 
 // const argv = yargs
 //   .options({
@@ -25,6 +22,36 @@ const geocode = require('./utils/geocode.js');
 //   .argv;
 
 // console.log(argv);
+
+if (!address) {
+    console.log('Please provide an address: node app.js [ADDRESS] \nExample: node app.js NewYork\n');
+
+} else {
+    geocode(address, (error, { latitude, longitude, location }) => {
+        if (error) {
+            return console.log(error)
+        }
+
+        console.log(latitude, longitude, location);
+
+        forecast(latitude, longitude, (error, forecastData) => {
+            if (error) {
+                return console.log(error)
+            }
+
+            console.log(location)
+            console.log(forecastData)
+        })
+    })
+}
+
+// DARKSKY API
+//const darkskyURL = 'https://api.darksky.net/forecast/9a06b0fc0575fe9a8a56720eb9d953f6/37.8267,-122.4233';
+
+// GEOCODING --- MAPBOX API
+//const geocodeURL = 'https://api.mapbox.com/geocoding/v5/mapbox.places/' + address + '.json?access_token=pk.eyJ1IjoidGptYXJlbmciLCJhIjoiY2pzc2FtdXQ1MDEwMzN5dGxjdWpzem1sdSJ9.snBdNxYv3k0S3gzbvsF8BA';
+
+
 
 // // FORCAST
 // request({
@@ -99,12 +126,12 @@ const geocode = require('./utils/geocode.js');
 
 // }
 
-geocode('New York', (error, data) => {
-    console.log('Error', error)
-    console.log('Data', data)
-})
+// geocode('New York', (error, data) => {
+//     console.log('Error', error)
+//     console.log('Data', data)
+// })
 
-geocode('Michigan', (error, data) => {
-  console.log('Error', error)
-  console.log('Data', data)
-})
+// geocode('Michigan', (error, data) => {
+//   console.log('Error', error)
+//   console.log('Data', data)
+// })

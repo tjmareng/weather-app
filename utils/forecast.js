@@ -13,14 +13,14 @@ const forecast = (latitude, longitude, callback) => {
     }, (error, {body}) => {
         if (error) {
             // Low-level error 
-            console.log('Unable to connect to the weather service. ', undefined)
+            callback('Unable to connect to the weather service. ', undefined)
 
         } else if (body.error) {
             // Invalid location -- URL error
-            console.log('Unable to find location. Please try again with a valid location. ', undefined)
+            callback('Unable to find location. Please try again with a valid location. ', undefined)
 
         } else {
-            console.log(undefined, response.body.daily.data[0].summary + ' It is currently ' + response.body.currently.temperature + ' degrees out. There is a ' + response.body.currently.precipProbability + '% chance of rain. \n');
+            callback(undefined, body.daily.data[0].summary + ' It is currently ' + body.currently.temperature + ' degrees out. There is a ' + body.currently.precipProbability + '% chance of rain. \n');
 
         }
     });
