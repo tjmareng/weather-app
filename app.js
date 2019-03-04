@@ -3,7 +3,7 @@ const yargs = require('yargs');
 const geocode = require('./utils/geocode.js');
 
 // DARKSKY API
-const darkskyURL = 'https://api.darksky.net/forecast/9a06b0fc0575fe9a8a56720eb9d953f6/37.8267,-122.4233';
+//const darkskyURL = 'https://api.darksky.net/forecast/9a06b0fc0575fe9a8a56720eb9d953f6/37.8267,-122.4233';
 
 // GEOCODING --- MAPBOX API
 //const geocodeURL = 'https://api.mapbox.com/geocoding/v5/mapbox.places/' + address + '.json?access_token=pk.eyJ1IjoidGptYXJlbmciLCJhIjoiY2pzc2FtdXQ1MDEwMzN5dGxjdWpzem1sdSJ9.snBdNxYv3k0S3gzbvsF8BA';
